@@ -8,6 +8,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import my.app.entity.Courses;
+import my.app.entity.Department;
 import my.app.entity.Student;
 import my.app.entity.User;
 
@@ -30,6 +32,8 @@ private static SessionFactory sessionFactory;
 			cfg.setProperties(props);
 			cfg.addAnnotatedClass(User.class);
 			cfg.addAnnotatedClass(Student.class);
+			cfg.addAnnotatedClass(Department.class);
+			cfg.addAnnotatedClass(Courses.class);
 			
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 			sessionFactory = cfg.buildSessionFactory(serviceRegistry);

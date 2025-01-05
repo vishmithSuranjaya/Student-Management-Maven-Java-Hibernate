@@ -93,6 +93,8 @@ public class Dispatcherservlet extends HttpServlet {
 			
 			new StudentDAO().UpdateStudent(std);
 			response.sendRedirect(request.getContextPath() + "/students");
+		}else if(url_path.equals("/courses")) {
+			getView(request, "courses").forward(request, response);
 		}
 	}
 	

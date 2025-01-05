@@ -14,6 +14,8 @@
 <body>
 	<div class="container py-5">
 		<h1 class="mb-4">Courses List</h1>
+		<button class="btn btn-warning my-3" data-bs-toggle="modal"
+			data-bs-target="#studentModal">Add Course</button>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
