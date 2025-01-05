@@ -105,16 +105,17 @@
 									Date</label> <input type="date" class="form-control"
 									id="enrollmentdate" name="enrollmentdate" required>
 							</div>
-						</form>
-					</div>
-
-					<!-- Modal Footer -->
-					<div class="modal-footer">
+							<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary" form="studentForm">Save
 							Student</button>
 					</div>
+						</form>
+					</div>
+
+					<!-- Modal Footer -->
+					
 				</div>
 			</div>
 		</div>

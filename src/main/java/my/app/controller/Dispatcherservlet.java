@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.app.dao.CourseDAO;
+import my.app.dao.DepartmentDAO;
 import my.app.dao.StudentDAO;
 import my.app.dao.UserDAO;
+import my.app.entity.Courses;
+import my.app.entity.Department;
 import my.app.entity.Student;
 
 /**
@@ -94,7 +98,47 @@ public class Dispatcherservlet extends HttpServlet {
 			new StudentDAO().UpdateStudent(std);
 			response.sendRedirect(request.getContextPath() + "/students");
 		}else if(url_path.equals("/courses")) {
+			List<Courses> courseList = new CourseDAO().getAllCourses();
+			request.setAttribute("courseList", courseList);
+			
+			List<Department> deptList = new DepartmentDAO().getAllDepts();
+			request.setAttribute("deptList", deptList);
 			getView(request, "courses").forward(request, response);
+		}else if(url_path.equals("/save-course")) {
+			Courses c = new Courses();
+			c.setCourse_name(request.getParameter("coursename"));
+			c.setCourse_code(request.getParameter("courseCode"));
+			c.setCredits(Integer.parseInt(request.getParameter("credits")));
+			Department dept = new Department();
+			dept.setDepartment_id(Integer.parseInt(request.getParameter("department")));
+			c.setDepartment(dept);
+			new CourseDAO().AddCourse(c);
+			response.sendRedirect(request.getContextPath()+"/courses");
+		}else if(url_path.equals("/deleteCourse")) {
+			int course_id = Integer.parseInt(request.getParameter("u"));
+			new CourseDAO().DeleteCourse(course_id);
+			response.sendRedirect(request.getContextPath()+"/courses");
+		}else if(url_path.equals("/editCourse")) {
+			int course_id = Integer.parseInt(request.getParameter("u"));
+			Courses course =  new CourseDAO().getCourse(course_id);
+			request.setAttribute("course", course);
+			
+			List<Department> dList = new DepartmentDAO().getAllDepts();
+			request.setAttribute("depts", dList);
+			getView(request, "editCourses").forward(request, response);
+		}else if(url_path.equals("/update-course")) {
+			int course_id = Integer.parseInt(request.getParameter("u"));
+			Courses course = new Courses();
+			course.setCourse_id(course_id);
+			course.setCourse_name(request.getParameter("coursename"));
+			course.setCourse_code(request.getParameter("courseCode"));
+			course.setCredits(Integer.parseInt(request.getParameter("credits")));
+			Department dept = new Department();
+			dept.setDepartment_id(Integer.parseInt(request.getParameter("dept")));
+			course.setDepartment(dept);
+			new CourseDAO().updateCourse(course);
+			response.sendRedirect(request.getContextPath()+"/courses");
+			
 		}
 	}
 	

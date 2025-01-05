@@ -41,4 +41,34 @@ public class CourseDAO {
 		}
 		 return courseList;
 	}
+	
+	public boolean DeleteCourse(int id) {
+		try(Session session = HibernateUtil.getSession().openSession()){
+			Transaction transaction = session.beginTransaction();
+			Courses course = session.get(Courses.class, id);
+			
+			if(course != null) {
+				session.delete(course);
+				transaction.commit();
+				return true;
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+	
+	public Courses getCourse(int id) {
+		Session session = HibernateUtil.getSession().openSession();
+		Courses course = session.get(Courses.class, id);
+		return course;
+	}
+	
+	public boolean updateCourse(Courses course) {
+		Session session = HibernateUtil.getSession().openSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(course);
+		transaction.commit();
+		return true;
+	}
 }

@@ -17,7 +17,6 @@
 	<div class="container py-5">
 		<div class="row">
 		<h1 class="mb-4">Edit Student</h1>
-		<h4><%=request.getParameter("u") %></h4>
 		<div class="col-md-4">
 			<form id="studentEditForm" method="POST" action="update-student?u=<%=request.getParameter("u")%>">
 				<div class="mb-3">
